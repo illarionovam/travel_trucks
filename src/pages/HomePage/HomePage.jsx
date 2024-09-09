@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import css from "./HomePage.module.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -9,9 +10,15 @@ const HomePage = () => {
 
   return (
     <main>
-      <h1>Campers of your dreams</h1>
-      <h2>You can find everything you want in our catalog</h2>
-      <button onClick={navigateToCatalog}>View Now</button>
+      <div className={css.heroContainer}>
+        <h1 className={css.heroText}>Campers of your dreams</h1>
+        <h2 className={css.heroSubtitleText}>
+          You can find everything you want in our catalog
+        </h2>
+        <button className={css.heroBtn} onClick={navigateToCatalog}>
+          View Now
+        </button>
+      </div>
     </main>
   );
 };
