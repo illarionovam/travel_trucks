@@ -1,6 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap");
+
+:root {
+  --main: #101828;
+  --text: #475467;
+  --gray: #6c717b;
+  --button: #e44848;
+  --button-hover: #d84343;
+  --rating: #ffc531;
+  --light-gray: #dadde1;
+  --badges: #f2f4f7;
+  --inputs: #f7f7f7;
+  --white: #ffffff;
+
+  --transition: 300ms ease-in;
+
+  --max-outer-container-width: 1440px;
+}
+
 body {
-  font-family: sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.5;
+  color: var(--main);
 }
 
 h1,

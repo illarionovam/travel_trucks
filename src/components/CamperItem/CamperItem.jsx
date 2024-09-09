@@ -1,3 +1,5 @@
+import css from "./CamperItem.module.css";
+
 const CamperItem = ({ data }) => {
   return (
     <div>
