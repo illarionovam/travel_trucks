@@ -2,9 +2,15 @@ import React from "react";
 import css from "./Filters.module.css";
 import sprite from "../../images/icons.svg";
 import clsx from "clsx";
-import { selectTypeFilter } from "../../redux/filters/selectors";
+import {
+  selectTypeFilter,
+  selectEquipmentFilter,
+} from "../../redux/filters/selectors";
 import { useSelector, useDispatch } from "react-redux";
-import { changeTypeFilter } from "../../redux/filters/slice";
+import {
+  changeTypeFilter,
+  changeEquipmentFilter,
+} from "../../redux/filters/slice";
 
 const Filters = ({ title, filters, onlyOneItem }) => {
   const labelToValue = {
@@ -20,18 +26,16 @@ const Filters = ({ title, filters, onlyOneItem }) => {
 
   const dispatch = useDispatch();
   const typeFilter = useSelector(selectTypeFilter);
+  const equipmentFilter = useSelector(selectEquipmentFilter);
 
   const buildButtonClass = (currentFilter) => {
     if (onlyOneItem) {
       return clsx(css.filterItem, typeFilter === currentFilter && css.selected);
     } else {
-      return clsx(css.filterItem);
-      /*
       return clsx(
         css.filterItem,
         equipmentFilter.includes(currentFilter) && css.selected
       );
-      */
     }
   };
 
@@ -43,6 +47,15 @@ const Filters = ({ title, filters, onlyOneItem }) => {
         dispatch(changeTypeFilter(currentFilter));
       }
     } else {
+      if (equipmentFilter.includes(currentFilter)) {
+        dispatch(
+          changeEquipmentFilter(
+            equipmentFilter.filter((filter_i) => filter_i !== currentFilter)
+          )
+        );
+      } else {
+        dispatch(changeEquipmentFilter([...equipmentFilter, currentFilter]));
+      }
     }
   };
 

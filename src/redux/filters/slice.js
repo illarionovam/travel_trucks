@@ -5,9 +5,11 @@ const filtersSlice = createSlice({
   initialState: {
     locationFilter: "",
     typeFilter: "",
+    equipmentFilter: [],
     allFilters: {
       locationFilter: "",
       typeFilter: "",
+      equipmentFilter: [],
     },
   },
   reducers: {
@@ -17,13 +19,21 @@ const filtersSlice = createSlice({
     changeTypeFilter(state, action) {
       state.typeFilter = action.payload;
     },
+    changeEquipmentFilter(state, action) {
+      state.equipmentFilter = action.payload;
+    },
     applyFilters(state) {
       state.allFilters.locationFilter = state.locationFilter;
       state.allFilters.typeFilter = state.typeFilter;
+      state.allFilters.equipmentFilter = state.equipmentFilter;
     },
   },
 });
 
-export const { changeLocationFilter, changeTypeFilter, applyFilters } =
-  filtersSlice.actions;
+export const {
+  changeLocationFilter,
+  changeTypeFilter,
+  changeEquipmentFilter,
+  applyFilters,
+} = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;
