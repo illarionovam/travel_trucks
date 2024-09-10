@@ -1,0 +1,32 @@
+.selectContainer {
+  margin-top: 8px;
+  position: relative;
+  width: 100%;
+  padding: 0;
+
+  .selectBar {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    border: none;
+    padding: 18px 46px 14px 46px;
+    background-color: var(--inputs);
+    border-radius: 12px;
+    color: var(--main);
+    fill: var(--main);
+  }
+
+  .mapIcon {
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .defaultOption {
+    color: rgba(16, 24, 40, 0.6);
+    fill: rgba(16, 24, 40, 0.6);
+  }
+}

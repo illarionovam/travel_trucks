@@ -31,19 +31,5 @@
   .heroBtn {
     margin-top: 40px;
     width: 173px;
-    height: 56px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    background-color: var(--button);
-    border: none;
-    color: var(--white);
-    font-weight: 500;
-    letter-spacing: -0.005em;
-    border-radius: 200px;
-
-    &:hover,
-    &:focus {
-      background-color: var(--button-hover);
-    }
   }
 }

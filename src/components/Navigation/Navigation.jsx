@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 import css from "./Navigation.module.css";
-import sprite from "../../images/icons.svg#logo";
+import sprite from "../../images/icons.svg";
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
@@ -15,7 +15,7 @@ const Navigation = () => {
           <div className={css.logoNavigationContainer}>
             <NavLink to="/">
               <svg width="136" height="16">
-                <use xlinkHref={`${sprite}#logo`} />
+                <use href={`${sprite}#logo`} />
               </svg>
             </NavLink>
           </div>
