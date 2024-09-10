@@ -1,7 +1,7 @@
 import css from "./LocationPicklist.module.css";
 import sprite from "../../images/icons.svg";
-import { selectLocationFilter } from "../../redux/filters/selectors";
 import clsx from "clsx";
+import { selectLocationFilter } from "../../redux/filters/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { changeLocationFilter } from "../../redux/filters/slice";
 

@@ -1,17 +1,49 @@
 import React from "react";
 import css from "./Filters.module.css";
 import sprite from "../../images/icons.svg";
+import clsx from "clsx";
+import { selectTypeFilter } from "../../redux/filters/selectors";
+import { useSelector, useDispatch } from "react-redux";
+import { changeTypeFilter } from "../../redux/filters/slice";
 
 const Filters = ({ title, filters, onlyOneItem }) => {
-  const titleToIcon = {
+  const labelToValue = {
     AC: "ac",
     Automatic: "transmission",
     Kitchen: "kitchen",
     TV: "tv",
     Bathroom: "bathroom",
-    Van: "van",
-    "Fully Integrated": "fullIntegrated",
+    Van: "panelTruck",
+    "Fully Integrated": "fullyIntegrated",
     Alcove: "alcove",
+  };
+
+  const dispatch = useDispatch();
+  const typeFilter = useSelector(selectTypeFilter);
+
+  const buildButtonClass = (currentFilter) => {
+    if (onlyOneItem) {
+      return clsx(css.filterItem, typeFilter === currentFilter && css.selected);
+    } else {
+      return clsx(css.filterItem);
+      /*
+      return clsx(
+        css.filterItem,
+        equipmentFilter.includes(currentFilter) && css.selected
+      );
+      */
+    }
+  };
+
+  const handleClick = (currentFilter) => {
+    if (onlyOneItem) {
+      if (typeFilter === currentFilter) {
+        dispatch(changeTypeFilter(""));
+      } else {
+        dispatch(changeTypeFilter(currentFilter));
+      }
+    } else {
+    }
   };
 
   return (
@@ -21,9 +53,12 @@ const Filters = ({ title, filters, onlyOneItem }) => {
       <ul className={css.filters}>
         {filters.map((filter, index) => (
           <li key={index}>
-            <button className={css.filterItem}>
+            <button
+              className={buildButtonClass(labelToValue[filter])}
+              onClick={() => handleClick(labelToValue[filter])}
+            >
               <svg width="32" height="32">
-                <use href={`${sprite}#${titleToIcon[filter]}`} />
+                <use href={`${sprite}#${labelToValue[filter]}`} />
               </svg>
               <p className={css.filterItemTitle}>{filter}</p>
             </button>
