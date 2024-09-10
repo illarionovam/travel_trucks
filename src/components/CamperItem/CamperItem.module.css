@@ -30,11 +30,46 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    flex-grow: 1;
+
+    .description {
+      color: var(--text);
+    }
 
     .header {
       display: flex;
       flex-direction: column;
       gap: 8px;
+
+      .headerDetails {
+        display: flex;
+        gap: 16px;
+
+        .ratingContainer,
+        .locationContainer {
+          display: flex;
+          gap: 4px;
+          align-items: center;
+        }
+      }
+
+      .headerTitle {
+        display: flex;
+        justify-content: space-between;
+
+        .headerTitleText {
+          font-weight: 600;
+          line-height: 1.33;
+          font-size: 24px;
+        }
+
+        .priceLikeContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 12px;
+        }
+      }
     }
   }
 }

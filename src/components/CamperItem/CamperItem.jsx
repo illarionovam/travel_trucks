@@ -1,5 +1,10 @@
 import css from "./CamperItem.module.css";
 import { useNavigate } from "react-router-dom";
+import sprite from "../../images/icons.svg";
+import {
+  formatLocation,
+  truncateDescription,
+} from "../../helpers/formattingHelper";
 
 const CamperItem = ({ data }) => {
   const navigate = useNavigate();
@@ -16,17 +21,38 @@ const CamperItem = ({ data }) => {
       <div className={css.camperItemInfoContainer}>
         <div className={css.header}>
           <div className={css.headerTitle}>
-            {data.name}
-            {data.price}
+            <h2 className={css.headerTitleText}>{data.name}</h2>
+            <div className={css.priceLikeContainer}>
+              <p className={css.headerTitleText}>
+                &#8364;{data.price.toFixed(2)}
+              </p>
+              <svg width="24" height="20">
+                <use href={`${sprite}#heart`} />
+              </svg>
+            </div>
           </div>
           <div className={css.headerDetails}>
-            {data.rating} ({data.reviews.length} Reviews)
-            {data.location}
+            <div className={css.ratingContainer}>
+              <svg width="16" height="16">
+                <use href={`${sprite}#star`} />
+              </svg>
+              <p>
+                {data.rating}({data.reviews.length} Reviews)
+              </p>
+            </div>
+            <div className={css.locationContainer}>
+              <svg width="16" height="16">
+                <use href={`${sprite}#map`} />
+              </svg>
+              <p>{formatLocation(data.location)}</p>
+            </div>
           </div>
-          <div className={css.description}>{data.description}</div>
-          <div className={css.features}></div>
-          <button onClick={() => navigateToDetails(data.id)}>Show more</button>
         </div>
+        <p className={css.description}>
+          {truncateDescription(data.description)}
+        </p>
+        <div className={css.features}></div>
+        <button onClick={() => navigateToDetails(data.id)}>Show more</button>
       </div>
     </div>
   );
