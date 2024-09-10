@@ -2,7 +2,7 @@ import React from "react";
 import css from "./Filters.module.css";
 import sprite from "../../images/icons.svg";
 
-const Filters = ({ title, filters }) => {
+const Filters = ({ title, filters, onlyOneItem }) => {
   const titleToIcon = {
     AC: "ac",
     Automatic: "transmission",

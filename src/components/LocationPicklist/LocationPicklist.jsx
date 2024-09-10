@@ -1,19 +1,20 @@
-import { useState } from "react";
 import css from "./LocationPicklist.module.css";
 import sprite from "../../images/icons.svg";
+import { selectLocationFilter } from "../../redux/filters/selectors";
 import clsx from "clsx";
+import { useSelector, useDispatch } from "react-redux";
+import { changeLocationFilter } from "../../redux/filters/slice";
 
-const LocationPicklist = ({ callback }) => {
-  const [inputIsEmpty, setInputIsEmpty] = useState(true);
+const LocationPicklist = () => {
+  const dispatch = useDispatch();
+  const locationFilter = useSelector(selectLocationFilter);
 
   const buildIconClass = () => {
-    return clsx(css.mapIcon, inputIsEmpty && css.defaultOption);
+    return clsx(css.mapIcon, locationFilter === "" && css.defaultOption);
   };
 
   const handleChange = (evt) => {
-    const value = evt.target.value.trim();
-    setInputIsEmpty(value === "");
-    callback(value);
+    dispatch(changeLocationFilter(evt.target.value));
   };
 
   return (
