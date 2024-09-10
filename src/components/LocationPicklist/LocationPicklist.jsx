@@ -1,15 +1,24 @@
-import React from "react";
+import { useState } from "react";
 import css from "./LocationPicklist.module.css";
 import sprite from "../../images/icons.svg";
+import clsx from "clsx";
 
 const LocationPicklist = ({ callback }) => {
+  const [inputIsEmpty, setInputIsEmpty] = useState(true);
+
+  const buildIconClass = () => {
+    return clsx(css.mapIcon, inputIsEmpty && css.defaultOption);
+  };
+
   const handleChange = (evt) => {
-    callback(evt.target.value);
+    const value = evt.target.value.trim();
+    setInputIsEmpty(value === "");
+    callback(value);
   };
 
   return (
     <div className={css.locationFilterContainer}>
-      <svg width="20" height="20" className={css.mapIcon}>
+      <svg width="20" height="20" className={buildIconClass()}>
         <use href={`${sprite}#map`} />
       </svg>
       <input
