@@ -1,6 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { changeLocationFilter } from "../../redux/filters/slice";
+const handleChange = (evt) => {
+  dispatch(changeLocationFilter(evt.target.value));
+};
+import { useSelector } from "react-redux";
 import {
   selectAllLocations,
   selectLocationFilter,
@@ -10,13 +12,12 @@ import sprite from "../../images/icons.svg";
 import { formatLocation } from "../../helpers/formattingHelper";
 import clsx from "clsx";
 
-const LocationPicklist = () => {
-  const dispatch = useDispatch();
+const LocationPicklist = ({ callback }) => {
   const options = [...new Set(useSelector(selectAllLocations))];
   const locationFilter = useSelector(selectLocationFilter);
 
   const handleChange = (evt) => {
-    dispatch(changeLocationFilter(evt.target.value));
+    callback(evt.target.value);
   };
 
   const buildSelectClass = () => {

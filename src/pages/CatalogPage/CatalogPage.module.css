@@ -14,5 +14,13 @@
         color: var(--gray);
       }
     }
+
+    .featureFiltersContainer {
+      margin-top: 40px;
+    }
+
+    .filtersBtn {
+      margin-top: 40px;
+    }
   }
 }
