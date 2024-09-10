@@ -23,13 +23,16 @@
       height: 96px;
       border: 1px solid var(--light-gray);
       border-radius: 12px;
+      background-color: var(--white);
+      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 8px;
 
-      &.selected {
+      &.selected,
+      &:hover {
         border-color: var(--button);
       }
 
@@ -37,6 +40,7 @@
         font-weight: 500;
         letter-spacing: -0.005em;
         text-align: center;
+        color: var(--main);
       }
     }
   }

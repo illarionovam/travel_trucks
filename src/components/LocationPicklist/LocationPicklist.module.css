@@ -1,20 +1,20 @@
-.selectContainer {
+.locationFilterContainer {
   margin-top: 8px;
   position: relative;
-  width: 100%;
-  padding: 0;
 
-  .selectBar {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 100%;
+  .filterInput {
     border: none;
     padding: 18px 46px 14px 46px;
     background-color: var(--inputs);
     border-radius: 12px;
     color: var(--main);
     fill: var(--main);
+    outline: none;
+    width: 100%;
+
+    &::placeholder {
+      color: rgba(16, 24, 40, 0.6);
+    }
   }
 
   .mapIcon {
@@ -26,7 +26,6 @@
   }
 
   .defaultOption {
-    color: rgba(16, 24, 40, 0.6);
     fill: rgba(16, 24, 40, 0.6);
   }
 }

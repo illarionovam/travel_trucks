@@ -16,9 +16,7 @@ const CatalogPage = () => {
   }, [dispatch]);
 
   const applyFilters = () => {
-    if (localLocationFilter.trim() !== "") {
-      dispatch(changeLocationFilter(localLocationFilter));
-    }
+    dispatch(changeLocationFilter(localLocationFilter));
   };
 
   return (

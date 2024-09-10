@@ -7,7 +7,7 @@ const filtersSlice = createSlice({
   },
   reducers: {
     changeLocationFilter(state, action) {
-      state.locationFilter = action.payload;
+      state.locationFilter = action.payload.trim().toLowerCase();
     },
   },
 });

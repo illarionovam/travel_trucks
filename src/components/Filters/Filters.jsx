@@ -21,12 +21,12 @@ const Filters = ({ title, filters }) => {
       <ul className={css.filters}>
         {filters.map((filter, index) => (
           <li key={index}>
-            <div className={css.filterItem}>
+            <button className={css.filterItem}>
               <svg width="32" height="32">
                 <use href={`${sprite}#${titleToIcon[filter]}`} />
               </svg>
               <p className={css.filterItemTitle}>{filter}</p>
-            </div>
+            </button>
           </li>
         ))}
       </ul>

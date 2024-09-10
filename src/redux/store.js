@@ -11,13 +11,11 @@ import {
 } from "redux-persist";
 import { campersReducer } from "./campers/slice";
 import { filtersReducer } from "./filters/slice";
-import { filteredCampersReducer } from "./filteredCampers/slice";
 
 export const store = configureStore({
   reducer: {
     campers: campersReducer,
     filters: filtersReducer,
-    filteredCampers: filteredCampersReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectFilteredCampers } from "../../redux/filteredCampers/selectors";
+import { selectFilteredCampers } from "../../redux/campers/selectors";
 import CamperItem from "../CamperItem/CamperItem";
 
 const CampersList = () => {
