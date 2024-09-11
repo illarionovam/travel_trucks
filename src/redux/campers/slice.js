@@ -18,6 +18,7 @@ const campersSlice = createSlice({
     currentPage: 1,
     currentPageAPI: 1,
     isLastPage: false,
+    favorites: [],
     loading: false,
     error: null,
   },
@@ -32,6 +33,15 @@ const campersSlice = createSlice({
     },
     clearCurrentCamper(state) {
       state.currentCamper = null;
+    },
+    switchFavorites(state, action) {
+      if (state.favorites.includes(action.payload)) {
+        state.favorites = state.favorites.filter(
+          (favorite_i) => favorite_i !== action.payload
+        );
+      } else {
+        state.favorites = [...state.favorites, action.payload];
+      }
     },
   },
   extraReducers: (builder) => {
@@ -53,5 +63,6 @@ const campersSlice = createSlice({
   },
 });
 
-export const { changeCurrentPage, clearCurrentCamper } = campersSlice.actions;
+export const { changeCurrentPage, clearCurrentCamper, switchFavorites } =
+  campersSlice.actions;
 export const campersReducer = campersSlice.reducer;

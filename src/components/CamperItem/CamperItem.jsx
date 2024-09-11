@@ -4,12 +4,21 @@ import sprite from "../../images/icons.svg";
 import { truncateDescription } from "../../helpers/formattingHelper";
 import FeatureItem from "../FeatureItem/FeatureItem";
 import RatingLocation from "../RatingLocation/RatingLocation";
+import { switchFavorites } from "../../redux/campers/slice";
+import { selectFavorites } from "../../redux/campers/selectors";
+import { useSelector, useDispatch } from "react-redux";
 
 const CamperItem = ({ data }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const favorites = useSelector(selectFavorites);
 
   const navigateToDetails = (id) => {
     navigate(`/catalog/${id}`, { replace: true });
+  };
+
+  const handleClick = (id) => {
+    dispatch(switchFavorites(id));
   };
 
   return (
@@ -25,9 +34,20 @@ const CamperItem = ({ data }) => {
               <p className={css.headerTitleText}>
                 &#8364;{data.price.toFixed(2)}
               </p>
-              <svg width="24" height="20">
-                <use href={`${sprite}#heart`} />
-              </svg>
+              <button
+                className={css.invisibleButton}
+                onClick={() => handleClick(data.id)}
+              >
+                <svg
+                  width="24"
+                  height="20"
+                  className={
+                    favorites.includes(data.id) ? css.redHeart : css.blackHeart
+                  }
+                >
+                  <use href={`${sprite}#heart`} />
+                </svg>
+              </button>
             </div>
           </div>
           <RatingLocation
