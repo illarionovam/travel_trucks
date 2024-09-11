@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { fetchCamperById } from "../../redux/campers/operations";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentCamper } from "../../redux/campers/selectors";
+import { clearCurrentCamper } from "../../redux/campers/slice";
 import ImageGallery from "../../components/ImageGallery/ImageGallery";
 import RatingLocation from "../../components/RatingLocation/RatingLocation";
 import css from "./CamperDetailsPage.module.css";
@@ -14,8 +15,10 @@ const CamperDetailsPage = () => {
   const currentCamper = useSelector(selectCurrentCamper);
 
   useEffect(() => {
-    console.log(id);
     dispatch(fetchCamperById(id));
+    return () => {
+      dispatch(clearCurrentCamper());
+    };
   }, [dispatch]);
 
   if (!currentCamper) {

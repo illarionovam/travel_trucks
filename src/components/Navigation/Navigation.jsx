@@ -1,13 +1,19 @@
 import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import clsx from "clsx";
 import css from "./Navigation.module.css";
 import sprite from "../../images/icons.svg";
+import { useSelector } from "react-redux";
+import { selectCurrentCamper } from "../../redux/campers/selectors";
 
-const buildLinkClass = ({ isActive }) => {
-  return clsx(css.link, isActive && css.active);
+const buildLinkClass = (hasId, isActive) => {
+  return clsx(css.link, isActive && !hasId && css.active);
 };
 
 const Navigation = () => {
+  const currentCamper = useSelector(selectCurrentCamper);
+  const hasId = currentCamper != null;
+
   return (
     <header className={css.header}>
       <div className={css.headerContainer}>
@@ -20,10 +26,16 @@ const Navigation = () => {
             </NavLink>
           </div>
           <div className={css.textNavigationContainer}>
-            <NavLink to="/" className={buildLinkClass}>
+            <NavLink
+              to="/"
+              className={({ isActive }) => buildLinkClass(hasId, isActive)}
+            >
               Home
             </NavLink>
-            <NavLink to="/catalog" className={buildLinkClass}>
+            <NavLink
+              to="/catalog"
+              className={({ isActive }) => buildLinkClass(hasId, isActive)}
+            >
               Catalog
             </NavLink>
           </div>

@@ -30,6 +30,9 @@ const campersSlice = createSlice({
         state.isLastPage = false;
       }
     },
+    clearCurrentCamper(state) {
+      state.currentCamper = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,5 +53,5 @@ const campersSlice = createSlice({
   },
 });
 
-export const { changeCurrentPage } = campersSlice.actions;
+export const { changeCurrentPage, clearCurrentCamper } = campersSlice.actions;
 export const campersReducer = campersSlice.reducer;
