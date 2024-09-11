@@ -5,6 +5,7 @@ import {
   formatLocation,
   truncateDescription,
 } from "../../helpers/formattingHelper";
+import FeatureItem from "../FeatureItem/FeatureItem";
 
 const CamperItem = ({ data }) => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const CamperItem = ({ data }) => {
               <svg width="16" height="16">
                 <use href={`${sprite}#star`} />
               </svg>
-              <p>
+              <p className={css.underlineText}>
                 {data.rating}({data.reviews.length} Reviews)
               </p>
             </div>
@@ -51,7 +52,23 @@ const CamperItem = ({ data }) => {
         <p className={css.description}>
           {truncateDescription(data.description)}
         </p>
-        <div className={css.features}></div>
+        <div className={css.features}>
+          <FeatureItem value="transmission" label={data.transmission} />
+          <FeatureItem value="engine" label={data.engine} />
+          {data.AC && <FeatureItem value="ac" label="AC" />}
+          {data.bathroom && <FeatureItem value="bathroom" label="bathroom" />}
+          {data.kitchen && <FeatureItem value="kitchen" label="kitchen" />}
+          {data.TV && <FeatureItem value="tv" label="TV" />}
+          {data.radio && <FeatureItem value="radio" label="radio" />}
+          {data.refrigerator && (
+            <FeatureItem value="refrigerator" label="refrigerator" />
+          )}
+          {data.microwave && (
+            <FeatureItem value="microwave" label="microwave" />
+          )}
+          {data.gas && <FeatureItem value="gas" label="gas" />}
+          {data.water && <FeatureItem value="water" label="water" />}
+        </div>
         <button onClick={() => navigateToDetails(data.id)}>Show more</button>
       </div>
     </div>

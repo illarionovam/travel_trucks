@@ -1,4 +1,3 @@
-import React from "react";
 import css from "./Filters.module.css";
 import sprite from "../../images/icons.svg";
 import clsx from "clsx";

@@ -10,3 +10,8 @@ export const truncateDescription = (oldDescription) => {
     ? oldDescription.slice(0, maxLength) + "..."
     : oldDescription;
 };
+
+export const capitalizeString = (str) => {
+  if (!str || str === "AC" || str === "TV") return str;
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
