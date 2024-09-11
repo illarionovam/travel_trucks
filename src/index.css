@@ -59,8 +59,7 @@ button {
   font-weight: 500;
   letter-spacing: -0.005em;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: var(--button-hover);
   }
 }

@@ -6,6 +6,7 @@ import css from "./CatalogPage.module.css";
 import LocationPicklist from "../../components/LocationPicklist/LocationPicklist";
 import Filters from "../../components/Filters/Filters";
 import { applyFilters } from "../../redux/filters/slice";
+import { changeCurrentPage } from "../../redux/campers/slice";
 
 const CatalogPage = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ const CatalogPage = () => {
 
   const handleClick = () => {
     dispatch(applyFilters());
+    dispatch(changeCurrentPage(1));
+    dispatch(fetchCampers());
   };
 
   return (
