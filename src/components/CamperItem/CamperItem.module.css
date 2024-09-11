@@ -46,22 +46,6 @@
       flex-direction: column;
       gap: 8px;
 
-      .headerDetails {
-        display: flex;
-        gap: 16px;
-
-        .ratingContainer,
-        .locationContainer {
-          display: flex;
-          gap: 4px;
-          align-items: center;
-
-          .underlineText {
-            text-decoration: underline;
-          }
-        }
-      }
-
       .headerTitle {
         display: flex;
         justify-content: space-between;

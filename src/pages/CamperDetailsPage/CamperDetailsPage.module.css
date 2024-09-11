@@ -1,0 +1,27 @@
+.detailPageContainer {
+  padding: 48px 64px;
+
+  .mainInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+
+    .mainInfoTitleBlock {
+      .title {
+        font-weight: 600;
+        line-height: 1.33;
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      .price {
+        margin-bottom: 0;
+        margin-top: 16px;
+      }
+    }
+
+    .description {
+      color: var(--text);
+    }
+  }
+}

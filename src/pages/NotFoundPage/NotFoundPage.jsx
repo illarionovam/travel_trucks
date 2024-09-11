@@ -8,10 +8,10 @@ const NotFoundPage = () => {
   };
 
   return (
-    <>
+    <main>
       <p>There is nothing here. Please, go back to Home page.</p>
       <button onClick={navigateToHome}>Back Home</button>
-    </>
+    </main>
   );
 };
 

@@ -1,11 +1,9 @@
 import css from "./CamperItem.module.css";
 import { useNavigate } from "react-router-dom";
 import sprite from "../../images/icons.svg";
-import {
-  formatLocation,
-  truncateDescription,
-} from "../../helpers/formattingHelper";
+import { truncateDescription } from "../../helpers/formattingHelper";
 import FeatureItem from "../FeatureItem/FeatureItem";
+import RatingLocation from "../RatingLocation/RatingLocation";
 
 const CamperItem = ({ data }) => {
   const navigate = useNavigate();
@@ -32,22 +30,11 @@ const CamperItem = ({ data }) => {
               </svg>
             </div>
           </div>
-          <div className={css.headerDetails}>
-            <div className={css.ratingContainer}>
-              <svg width="16" height="16">
-                <use href={`${sprite}#star`} />
-              </svg>
-              <p className={css.underlineText}>
-                {data.rating}({data.reviews.length} Reviews)
-              </p>
-            </div>
-            <div className={css.locationContainer}>
-              <svg width="16" height="16">
-                <use href={`${sprite}#map`} />
-              </svg>
-              <p>{formatLocation(data.location)}</p>
-            </div>
-          </div>
+          <RatingLocation
+            rating={data.rating}
+            reviewsCount={data.reviews.length}
+            location={data.location}
+          />
         </div>
         <p className={css.description}>
           {truncateDescription(data.description)}

@@ -9,16 +9,14 @@ const HomePage = () => {
   };
 
   return (
-    <main>
-      <div className={css.heroContainer}>
-        <h1 className={css.heroText}>Campers of your dreams</h1>
-        <h2 className={css.heroSubtitleText}>
-          You can find everything you want in our catalog
-        </h2>
-        <button className={css.heroBtn} onClick={navigateToCatalog}>
-          View Now
-        </button>
-      </div>
+    <main className={css.heroContainer}>
+      <h1 className={css.heroText}>Campers of your dreams</h1>
+      <h2 className={css.heroSubtitleText}>
+        You can find everything you want in our catalog
+      </h2>
+      <button className={css.heroBtn} onClick={navigateToCatalog}>
+        View Now
+      </button>
     </main>
   );
 };

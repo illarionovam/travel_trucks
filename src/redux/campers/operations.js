@@ -6,12 +6,15 @@ import {
 import axios from "axios";
 
 axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
+const LIMIT = 4;
 
 export const fetchCamperById = createAsyncThunk(
   "campers/fetchSingle",
-  async ({ id }, thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
+      console.log(id);
       const response = await axios.get(`/campers/${id}`);
+      console.log(response.data);
 
       return response.data;
     } catch (e) {
@@ -32,10 +35,10 @@ export const fetchCampers = createAsyncThunk(
     let isLastPage = false;
 
     try {
-      if (filteredCampers.length < currentPage * 4) {
+      if (filteredCampers.length < currentPage * LIMIT) {
         while (true) {
           const response = await axios.get(
-            `/campers?page=${currentPageAPI}&limit=4${formatTypeQueryParam(
+            `/campers?page=${currentPageAPI}&limit=${LIMIT}${formatTypeQueryParam(
               allFilters.typeFilter
             )}${formatEquipmentQueryParam(
               allFilters.equipmentFilter,
@@ -74,12 +77,12 @@ export const fetchCampers = createAsyncThunk(
 
           currentPageAPI += 1;
 
-          if (response.data.total <= 4 * (currentPageAPI - 1)) {
+          if (response.data.total <= LIMIT * (currentPageAPI - 1)) {
             isLastPage = true;
             break;
           }
 
-          if (filteredCampers.length === 4 * currentPage) {
+          if (filteredCampers.length === LIMIT * currentPage) {
             break;
           }
         }
@@ -88,7 +91,7 @@ export const fetchCampers = createAsyncThunk(
       return {
         items: filteredCampers,
         currentPageAPI,
-        isLastPage: isLastPage && filteredCampers.length <= 4 * currentPage,
+        isLastPage: isLastPage && filteredCampers.length <= LIMIT * currentPage,
       };
     } catch (e) {
       console.log(e.message);
