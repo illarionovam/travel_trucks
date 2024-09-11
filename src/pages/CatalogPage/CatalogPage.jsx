@@ -22,7 +22,7 @@ const CatalogPage = () => {
   };
 
   return (
-    <div className={css.catalogContainer}>
+    <main className={css.catalogContainer}>
       <div className={css.filtersContainer}>
         <div className={css.locationFilterContainer}>
           <p className={css.locationFilterText}>Location</p>
@@ -46,7 +46,7 @@ const CatalogPage = () => {
         </button>
       </div>
       <CampersList />
-    </div>
+    </main>
   );
 };
 

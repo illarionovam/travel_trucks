@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCampers } from "./operations";
+import { fetchCampers, fetchCamperById } from "./operations";
 
 const handlePending = (state) => {
   state.loading = true;
@@ -13,6 +13,7 @@ const handleRejected = (state, action) => {
 const campersSlice = createSlice({
   name: "campers",
   initialState: {
+    currentCamper: null,
     items: [],
     currentPage: 1,
     currentPageAPI: 1,
@@ -40,7 +41,12 @@ const campersSlice = createSlice({
         state.currentPageAPI = action.payload.currentPageAPI;
         state.isLastPage = action.payload.isLastPage;
       })
-      .addCase(fetchCampers.rejected, handleRejected);
+      .addCase(fetchCampers.rejected, handleRejected)
+      .addCase(fetchCamperById.pending, handlePending)
+      .addCase(fetchCamperById.fulfilled, (state, action) => {
+        state.currentCamper = action.payload;
+      })
+      .addCase(fetchCamperById.rejected, handleRejected);
   },
 });
 

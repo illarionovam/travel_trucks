@@ -7,6 +7,20 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
 
+export const fetchCamperById = createAsyncThunk(
+  "campers/fetchSingle",
+  async ({ id }, thunkAPI) => {
+    try {
+      const response = await axios.get(`/campers/${id}`);
+
+      return response.data;
+    } catch (e) {
+      console.log(e.message);
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
 export const fetchCampers = createAsyncThunk(
   "campers/fetch",
   async (_, thunkAPI) => {
@@ -14,66 +28,67 @@ export const fetchCampers = createAsyncThunk(
     const filteredCampers = [...campers.items];
     const allFilters = filters.allFilters;
     let currentPageAPI = campers.currentPageAPI;
+    const currentPage = campers.currentPage;
     let isLastPage = false;
-    let addedItems = 0;
 
     try {
-      while (true) {
-        const response = await axios.get(
-          `/campers?page=${currentPageAPI}&limit=4${formatTypeQueryParam(
-            allFilters.typeFilter
-          )}${formatEquipmentQueryParam(
-            allFilters.equipmentFilter,
-            "transmission"
-          )}${formatEquipmentQueryParam(
-            allFilters.equipmentFilter,
-            "ac"
-          )}${formatEquipmentQueryParam(
-            allFilters.equipmentFilter,
-            "kitchen"
-          )}${formatEquipmentQueryParam(
-            allFilters.equipmentFilter,
-            "tv"
-          )}${formatEquipmentQueryParam(
-            allFilters.equipmentFilter,
-            "bathroom"
-          )}`
-        );
+      if (filteredCampers.length < currentPage * 4) {
+        while (true) {
+          const response = await axios.get(
+            `/campers?page=${currentPageAPI}&limit=4${formatTypeQueryParam(
+              allFilters.typeFilter
+            )}${formatEquipmentQueryParam(
+              allFilters.equipmentFilter,
+              "transmission"
+            )}${formatEquipmentQueryParam(
+              allFilters.equipmentFilter,
+              "ac"
+            )}${formatEquipmentQueryParam(
+              allFilters.equipmentFilter,
+              "kitchen"
+            )}${formatEquipmentQueryParam(
+              allFilters.equipmentFilter,
+              "tv"
+            )}${formatEquipmentQueryParam(
+              allFilters.equipmentFilter,
+              "bathroom"
+            )}`
+          );
 
-        for (let i = 0; i < response.data.items.length; i++) {
-          let matchFilters = true;
+          for (let i = 0; i < response.data.items.length; i++) {
+            let matchFilters = true;
 
-          if (
-            allFilters.locationFilter !== "" &&
-            !response.data.items[i].location
-              .toLowerCase()
-              .includes(allFilters.locationFilter)
-          ) {
-            matchFilters = false;
+            if (
+              allFilters.locationFilter !== "" &&
+              !response.data.items[i].location
+                .toLowerCase()
+                .includes(allFilters.locationFilter)
+            ) {
+              matchFilters = false;
+            }
+
+            if (matchFilters) {
+              filteredCampers.push(response.data.items[i]);
+            }
           }
 
-          if (matchFilters) {
-            filteredCampers.push(response.data.items[i]);
-            addedItems += 1;
+          currentPageAPI += 1;
+
+          if (response.data.total <= 4 * (currentPageAPI - 1)) {
+            isLastPage = true;
+            break;
           }
-        }
 
-        if (response.data.total <= 4 * currentPageAPI) {
-          isLastPage = true;
-          break;
-        }
-
-        currentPageAPI += 1;
-
-        if (addedItems >= 4) {
-          break;
+          if (filteredCampers.length === 4 * currentPage) {
+            break;
+          }
         }
       }
 
       return {
         items: filteredCampers,
         currentPageAPI,
-        isLastPage: isLastPage,
+        isLastPage: isLastPage && filteredCampers.length <= 4 * currentPage,
       };
     } catch (e) {
       console.log(e.message);
