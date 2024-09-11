@@ -15,3 +15,17 @@ export const capitalizeString = (str) => {
   if (!str || str === "AC" || str === "TV") return str;
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
+
+export const formatTypeQueryParam = (typeFilter) => {
+  return typeFilter !== "" ? `&form=${typeFilter}` : "";
+};
+
+export const formatEquipmentQueryParam = (equipmentFilter, type) => {
+  if (equipmentFilter.includes(type)) {
+    if (type === "transmission") return `&${type}=automatic`;
+    if (type === "ac" || type === "tv") return `&${type.toUpperCase()}=true`;
+    return `&${type}=true`;
+  }
+
+  return "";
+};
