@@ -26,6 +26,7 @@ const LocationPicklist = () => {
         onChange={handleChange}
         placeholder="City"
         className={css.filterInput}
+        value={locationFilter ? locationFilter : ""}
       ></input>
     </div>
   );
