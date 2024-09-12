@@ -28,6 +28,7 @@ export const fetchCampers = createAsyncThunk(
     const allFilters = filters.allFilters;
     let currentPageAPI = campers.currentPageAPI;
     const currentPage = campers.currentPage;
+    let isLastPage = false;
 
     try {
       if (filteredCampers.length < currentPage * LIMIT) {
@@ -73,6 +74,11 @@ export const fetchCampers = createAsyncThunk(
           currentPageAPI += 1;
 
           if (response.data.total <= LIMIT * (currentPageAPI - 1)) {
+            isLastPage = true;
+            break;
+          }
+
+          if (filteredCampers.length >= LIMIT * currentPage) {
             break;
           }
         }
@@ -82,7 +88,8 @@ export const fetchCampers = createAsyncThunk(
         items: filteredCampers,
         currentPageAPI,
         isLastPage:
-          (filteredCampers.length > LIMIT * (currentPage - 1) &&
+          (isLastPage &&
+            filteredCampers.length > LIMIT * (currentPage - 1) &&
             filteredCampers.length <= LIMIT * currentPage) ||
           filteredCampers.length === 0,
       };
