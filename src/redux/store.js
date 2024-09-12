@@ -11,10 +11,17 @@ import {
 } from "redux-persist";
 import { campersReducer } from "./campers/slice";
 import { filtersReducer } from "./filters/slice";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "campers",
+  storage,
+  whitelist: ["favorites", "booking"],
+};
 
 export const store = configureStore({
   reducer: {
-    campers: campersReducer,
+    campers: persistReducer(persistConfig, campersReducer),
     filters: filtersReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -24,3 +31,5 @@ export const store = configureStore({
       },
     }),
 });
+
+export const persistor = persistStore(store);

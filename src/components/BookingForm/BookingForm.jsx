@@ -27,8 +27,6 @@ const BookingForm = ({ camperId }) => {
   const handleSubmit = (camperId) => async (values, actions) => {
     try {
       await validationSchema.validate(values, { abortEarly: false });
-      actions.resetForm();
-
       const bookingDate = format(values.date, "dd/MM/yyyy");
 
       if (camperId in booking) {
@@ -49,6 +47,8 @@ const BookingForm = ({ camperId }) => {
           return;
         }
       }
+
+      actions.resetForm();
 
       dispatch(
         changeBooking({ id: camperId, date: bookingDate, email: values.email })
