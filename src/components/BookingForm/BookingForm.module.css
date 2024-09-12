@@ -41,6 +41,7 @@
 
       &.stretched {
         height: 118px;
+        resize: none;
       }
     }
   }

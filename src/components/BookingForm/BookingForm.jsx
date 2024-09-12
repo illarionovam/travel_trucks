@@ -115,6 +115,7 @@ const BookingForm = ({ camperId }) => {
             </div>
             <div>
               <Field
+                as="textarea"
                 type="text"
                 name="comment"
                 placeholder="Comment"

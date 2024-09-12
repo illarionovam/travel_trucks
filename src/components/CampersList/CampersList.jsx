@@ -21,6 +21,16 @@ const CampersList = () => {
     dispatch(fetchCampers());
   };
 
+  if (campers.length === 0) {
+    return (
+      <div className={css.rightSideContainer}>
+        <p className={css.errorText}>
+          There is nothing we can suggest you at the moment.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className={css.rightSideContainer}>
       <ul className={css.cardsContainer}>

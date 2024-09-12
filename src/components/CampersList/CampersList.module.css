@@ -3,6 +3,11 @@
   flex-direction: column;
   gap: 40px;
   align-items: center;
+  width: 100%;
+
+  .errorText {
+    text-align: center;
+  }
 
   .cardsContainer {
     display: flex;
