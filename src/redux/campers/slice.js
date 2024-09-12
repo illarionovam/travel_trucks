@@ -26,7 +26,6 @@ const campersSlice = createSlice({
   },
   reducers: {
     changeOpenFeatures(state, action) {
-      console.log("changeOpenFeatures", action.payload);
       state.openFeatures = action.payload;
     },
     changeCurrentPage(state, action) {

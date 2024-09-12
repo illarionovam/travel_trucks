@@ -23,7 +23,6 @@ const CamperDetailsPage = () => {
   const { id } = useParams();
   const currentCamper = useSelector(selectCurrentCamper);
   const openFeatures = useSelector(selectOpenFeatures);
-  console.log(openFeatures);
 
   useEffect(() => {
     dispatch(fetchCamperById(id));

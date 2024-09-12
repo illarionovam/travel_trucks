@@ -15,7 +15,6 @@ export const fetchCamperById = createAsyncThunk(
       const response = await axios.get(`/campers/${id}`);
       return response.data;
     } catch (e) {
-      console.log(e.message);
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -91,7 +90,6 @@ export const fetchCampers = createAsyncThunk(
         isLastPage: isLastPage && filteredCampers.length <= LIMIT * currentPage,
       };
     } catch (e) {
-      console.log(e.message);
       return thunkAPI.rejectWithValue(e.message);
     }
   }

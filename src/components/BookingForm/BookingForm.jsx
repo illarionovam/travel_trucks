@@ -63,7 +63,6 @@ const BookingForm = ({ camperId }) => {
         acc.push(curr.message);
         return acc;
       }, []);
-      console.log(error.inner[0].message);
       iziToast.error({
         title: "Validation Errors",
         message: errors.join(" "),
@@ -71,11 +70,6 @@ const BookingForm = ({ camperId }) => {
       });
     }
   };
-
-  const nameFieldId = useId();
-  const emailFieldId = useId();
-  const dateFieldId = useId();
-  const commentFieldId = useId();
 
   return (
     <Formik
@@ -98,7 +92,6 @@ const BookingForm = ({ camperId }) => {
               <Field
                 type="text"
                 name="name"
-                id={nameFieldId}
                 placeholder="Name*"
                 className={css.field}
               />
@@ -107,7 +100,6 @@ const BookingForm = ({ camperId }) => {
               <Field
                 type="email"
                 name="email"
-                id={emailFieldId}
                 placeholder="Email*"
                 className={css.field}
               />
@@ -120,14 +112,12 @@ const BookingForm = ({ camperId }) => {
                 dateFormat="dd/MM/yyyy"
                 className={css.field}
                 placeholderText="Booking date*"
-                id={dateFieldId}
               />
             </div>
             <div>
               <Field
                 type="text"
                 name="comment"
-                id={commentFieldId}
                 placeholder="Comment"
                 className={clsx(css.field, css.stretched)}
               />
