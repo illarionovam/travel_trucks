@@ -2,7 +2,7 @@ import css from "./CamperItem.module.css";
 import { useNavigate } from "react-router-dom";
 import sprite from "../../images/icons.svg";
 import { truncateDescription } from "../../helpers/formattingHelper";
-import FeatureItem from "../FeatureItem/FeatureItem";
+import FeatureItemsList from "../FeatureItemsList/FeatureItemsList";
 import RatingLocation from "../RatingLocation/RatingLocation";
 import { switchFavorites } from "../../redux/campers/slice";
 import { selectFavorites } from "../../redux/campers/selectors";
@@ -59,23 +59,7 @@ const CamperItem = ({ data }) => {
         <p className={css.description}>
           {truncateDescription(data.description)}
         </p>
-        <div className={css.features}>
-          <FeatureItem value="transmission" label={data.transmission} />
-          <FeatureItem value="engine" label={data.engine} />
-          {data.AC && <FeatureItem value="ac" label="AC" />}
-          {data.bathroom && <FeatureItem value="bathroom" label="bathroom" />}
-          {data.kitchen && <FeatureItem value="kitchen" label="kitchen" />}
-          {data.TV && <FeatureItem value="tv" label="TV" />}
-          {data.radio && <FeatureItem value="radio" label="radio" />}
-          {data.refrigerator && (
-            <FeatureItem value="refrigerator" label="refrigerator" />
-          )}
-          {data.microwave && (
-            <FeatureItem value="microwave" label="microwave" />
-          )}
-          {data.gas && <FeatureItem value="gas" label="gas" />}
-          {data.water && <FeatureItem value="water" label="water" />}
-        </div>
+        <FeatureItemsList data={data} />
         <button onClick={() => navigateToDetails(data.id)}>Show more</button>
       </div>
     </div>

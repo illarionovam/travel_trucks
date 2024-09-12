@@ -8,6 +8,7 @@ import ImageGallery from "../../components/ImageGallery/ImageGallery";
 import RatingLocation from "../../components/RatingLocation/RatingLocation";
 import css from "./CamperDetailsPage.module.css";
 import clsx from "clsx";
+import CamperFeatures from "../../components/CamperFeatures/CamperFeatures";
 
 const CamperDetailsPage = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,8 @@ const CamperDetailsPage = () => {
         <ImageGallery images={currentCamper.gallery} />
         <p className={css.description}>{currentCamper.description}</p>
       </div>
+      <hr />
+      <CamperFeatures data={currentCamper} />
     </main>
   );
 };
