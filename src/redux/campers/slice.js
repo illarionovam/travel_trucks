@@ -22,6 +22,7 @@ const campersSlice = createSlice({
     favorites: [],
     loading: false,
     error: null,
+    booking: {},
   },
   reducers: {
     changeOpenFeatures(state, action) {
@@ -35,6 +36,14 @@ const campersSlice = createSlice({
         state.items = [];
         state.isLastPage = false;
       }
+    },
+    changeBooking(state, action) {
+      const { id, date, email } = action.payload;
+
+      state.booking = {
+        ...state.booking,
+        [id]: { ...state.booking[id], [date]: email },
+      };
     },
     clearCurrentCamper(state) {
       state.currentCamper = null;
@@ -71,6 +80,7 @@ const campersSlice = createSlice({
 export const {
   changeCurrentPage,
   clearCurrentCamper,
+  changeBooking,
   switchFavorites,
   changeOpenFeatures,
 } = campersSlice.actions;

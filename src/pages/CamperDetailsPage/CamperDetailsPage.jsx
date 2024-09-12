@@ -16,6 +16,7 @@ import css from "./CamperDetailsPage.module.css";
 import clsx from "clsx";
 import CamperFeatures from "../../components/CamperFeatures/CamperFeatures";
 import CamperReviews from "../../components/CamperReviews/CamperReviews";
+import BookingForm from "../../components/BookingForm/BookingForm";
 
 const CamperDetailsPage = () => {
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const CamperDetailsPage = () => {
         ) : (
           <CamperReviews reviews={currentCamper.reviews} />
         )}
+        <BookingForm camperId={currentCamper.id} />
       </div>
     </main>
   );

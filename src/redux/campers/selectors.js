@@ -7,3 +7,4 @@ export const selectIsLastPage = (state) => state.campers.isLastPage;
 export const selectCurrentCamper = (state) => state.campers.currentCamper;
 export const selectFavorites = (state) => state.campers.favorites;
 export const selectOpenFeatures = (state) => state.campers.openFeatures;
+export const selectBooking = (state) => state.campers.booking;
