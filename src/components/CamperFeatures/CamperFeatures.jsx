@@ -5,7 +5,7 @@ import VehicleDetail from "../VehicleDetail/VehicleDetail";
 const CamperFeatures = ({ data }) => {
   return (
     <div className={css.feturesContainer}>
-      <FeatureItemsList data={data} />
+      <FeatureItemsList data={data} adjustColor={true} />
       <div className={css.vehicleDetails}>
         <h3 className={css.detailsTitle}>Vehicle details</h3>
         <div className={css.separatorLine}></div>

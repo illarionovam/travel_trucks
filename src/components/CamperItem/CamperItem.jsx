@@ -59,7 +59,7 @@ const CamperItem = ({ data }) => {
         <p className={css.description}>
           {truncateDescription(data.description)}
         </p>
-        <FeatureItemsList data={data} />
+        <FeatureItemsList data={data} adjustColor={false} />
         <button onClick={() => navigateToDetails(data.id)}>Show more</button>
       </div>
     </div>
