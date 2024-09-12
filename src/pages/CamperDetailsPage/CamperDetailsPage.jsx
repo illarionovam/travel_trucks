@@ -9,6 +9,7 @@ import RatingLocation from "../../components/RatingLocation/RatingLocation";
 import css from "./CamperDetailsPage.module.css";
 import clsx from "clsx";
 import CamperFeatures from "../../components/CamperFeatures/CamperFeatures";
+import CamperReviews from "../../components/CamperReviews/CamperReviews";
 
 const CamperDetailsPage = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const CamperDetailsPage = () => {
         <p className={css.description}>{currentCamper.description}</p>
       </div>
       <hr />
+      <CamperReviews reviews={currentCamper.reviews} />
       <CamperFeatures data={currentCamper} />
     </main>
   );

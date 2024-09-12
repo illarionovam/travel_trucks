@@ -1,0 +1,51 @@
+.reviewsContainer {
+  width: 631px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+
+  .singleReviewContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .reviewHeader {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .nameDiv {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        p {
+          font-weight: 500;
+        }
+      }
+
+      .iconDiv {
+        background-color: var(--badges);
+        border-radius: 60px;
+        width: 60px;
+        height: 60px;
+        position: relative;
+
+        p {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 1.33;
+          color: var(--button);
+        }
+      }
+    }
+
+    .comment {
+      color: var(--text);
+    }
+  }
+}
