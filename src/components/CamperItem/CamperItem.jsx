@@ -1,5 +1,4 @@
 import css from "./CamperItem.module.css";
-import { useNavigate } from "react-router-dom";
 import sprite from "../../images/icons.svg";
 import { truncateDescription } from "../../helpers/formattingHelper";
 import FeatureItemsList from "../FeatureItemsList/FeatureItemsList";
@@ -9,12 +8,12 @@ import { selectFavorites } from "../../redux/campers/selectors";
 import { useSelector, useDispatch } from "react-redux";
 
 const CamperItem = ({ data }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
 
   const navigateToDetails = (id) => {
-    navigate(`/catalog/${id}`, { replace: true });
+    const url = `/catalog/${id}`;
+    window.open(url, "_blank");
   };
 
   const handleClick = (id) => {

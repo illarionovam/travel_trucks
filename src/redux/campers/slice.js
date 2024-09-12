@@ -13,6 +13,7 @@ const handleRejected = (state, action) => {
 const campersSlice = createSlice({
   name: "campers",
   initialState: {
+    openFeatures: true,
     currentCamper: null,
     items: [],
     currentPage: 1,
@@ -23,6 +24,10 @@ const campersSlice = createSlice({
     error: null,
   },
   reducers: {
+    changeOpenFeatures(state, action) {
+      console.log("changeOpenFeatures", action.payload);
+      state.openFeatures = action.payload;
+    },
     changeCurrentPage(state, action) {
       state.currentPage = action.payload;
       if (action.payload === 1) {
@@ -63,6 +68,10 @@ const campersSlice = createSlice({
   },
 });
 
-export const { changeCurrentPage, clearCurrentCamper, switchFavorites } =
-  campersSlice.actions;
+export const {
+  changeCurrentPage,
+  clearCurrentCamper,
+  switchFavorites,
+  changeOpenFeatures,
+} = campersSlice.actions;
 export const campersReducer = campersSlice.reducer;

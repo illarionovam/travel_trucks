@@ -2,8 +2,14 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchCamperById } from "../../redux/campers/operations";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentCamper } from "../../redux/campers/selectors";
-import { clearCurrentCamper } from "../../redux/campers/slice";
+import {
+  selectCurrentCamper,
+  selectOpenFeatures,
+} from "../../redux/campers/selectors";
+import {
+  clearCurrentCamper,
+  changeOpenFeatures,
+} from "../../redux/campers/slice";
 import ImageGallery from "../../components/ImageGallery/ImageGallery";
 import RatingLocation from "../../components/RatingLocation/RatingLocation";
 import css from "./CamperDetailsPage.module.css";
@@ -15,17 +21,24 @@ const CamperDetailsPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const currentCamper = useSelector(selectCurrentCamper);
+  const openFeatures = useSelector(selectOpenFeatures);
+  console.log(openFeatures);
 
   useEffect(() => {
     dispatch(fetchCamperById(id));
     return () => {
       dispatch(clearCurrentCamper());
+      dispatch(changeOpenFeatures(true));
     };
   }, [dispatch]);
 
   if (!currentCamper) {
     return <p>Loading...</p>;
   }
+
+  const buildButtonClass = (withHover) => {
+    return clsx(css.invisibleButton, withHover && css.withHover);
+  };
 
   return (
     <main className={css.detailPageContainer}>
@@ -44,9 +57,28 @@ const CamperDetailsPage = () => {
         <ImageGallery images={currentCamper.gallery} />
         <p className={css.description}>{currentCamper.description}</p>
       </div>
-      <hr />
-      <CamperReviews reviews={currentCamper.reviews} />
-      <CamperFeatures data={currentCamper} />
+      <div className={css.subNavigation}>
+        <button
+          className={buildButtonClass(openFeatures)}
+          onClick={() => dispatch(changeOpenFeatures(true))}
+        >
+          Features
+        </button>
+        <button
+          className={buildButtonClass(!openFeatures)}
+          onClick={() => dispatch(changeOpenFeatures(false))}
+        >
+          Reviews
+        </button>
+      </div>
+      <div className={css.separatorLine}></div>
+      <div className={css.outletContainer}>
+        {openFeatures ? (
+          <CamperFeatures data={currentCamper} />
+        ) : (
+          <CamperReviews reviews={currentCamper.reviews} />
+        )}
+      </div>
     </main>
   );
 };
