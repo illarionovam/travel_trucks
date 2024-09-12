@@ -11,18 +11,23 @@ import {
 } from "redux-persist";
 import { campersReducer } from "./campers/slice";
 import { filtersReducer } from "./filters/slice";
+import { persistentComponentsReducer } from "./persistentComponents/slice";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "campers",
+  key: "persistentComponents",
   storage,
   whitelist: ["favorites", "booking"],
 };
 
 export const store = configureStore({
   reducer: {
-    campers: persistReducer(persistConfig, campersReducer),
+    campers: campersReducer,
     filters: filtersReducer,
+    persistentComponents: persistReducer(
+      persistConfig,
+      persistentComponentsReducer
+    ),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,5 +1,4 @@
 import css from "./BookingForm.module.css";
-import { useId } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
@@ -8,8 +7,8 @@ import clsx from "clsx";
 import "izitoast/dist/css/iziToast.min.css";
 import iziToast from "izitoast";
 import { useSelector, useDispatch } from "react-redux";
-import { selectBooking } from "../../redux/campers/selectors";
-import { changeBooking } from "../../redux/campers/slice";
+import { selectBooking } from "../../redux/persistentComponents/selectors";
+import { changeBooking } from "../../redux/persistentComponents/slice";
 import { format } from "date-fns";
 
 const BookingForm = ({ camperId }) => {

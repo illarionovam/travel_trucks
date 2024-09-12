@@ -3,9 +3,11 @@ import sprite from "../../images/icons.svg";
 import { truncateDescription } from "../../helpers/formattingHelper";
 import FeatureItemsList from "../FeatureItemsList/FeatureItemsList";
 import RatingLocation from "../RatingLocation/RatingLocation";
-import { switchFavorites } from "../../redux/campers/slice";
-import { selectFavorites } from "../../redux/campers/selectors";
+import { switchFavorites } from "../../redux/persistentComponents/slice";
+import { selectFavorites } from "../../redux/persistentComponents/selectors";
 import { useSelector, useDispatch } from "react-redux";
+import "izitoast/dist/css/iziToast.min.css";
+import iziToast from "izitoast";
 
 const CamperItem = ({ data }) => {
   const dispatch = useDispatch();
@@ -17,7 +19,17 @@ const CamperItem = ({ data }) => {
   };
 
   const handleClick = (id) => {
+    const wasInFavoritesBeforeClick = favorites.includes(id);
+
     dispatch(switchFavorites(id));
+
+    iziToast.success({
+      title: "Success",
+      message: wasInFavoritesBeforeClick
+        ? "Removed from favorites."
+        : "Added to favorites.",
+      position: "topRight",
+    });
   };
 
   return (
