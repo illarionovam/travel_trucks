@@ -3,6 +3,10 @@
   max-width: var(--max-outer-container-width);
   margin: 0 auto;
 
+  .errorText {
+    text-align: center;
+  }
+
   .mainInfo {
     display: flex;
     flex-direction: column;

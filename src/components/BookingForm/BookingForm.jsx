@@ -1,4 +1,3 @@
-import css from "./BookingForm.module.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
@@ -10,6 +9,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectBooking } from "../../redux/persistentComponents/selectors";
 import { changeBooking } from "../../redux/persistentComponents/slice";
 import { format } from "date-fns";
+import { registerLocale } from "react-datepicker";
+import { enUS } from "date-fns/locale";
+import css from "./BookingForm.module.css";
+
+registerLocale("custom-en", {
+  ...enUS,
+  options: {
+    ...enUS.options,
+    weekStartsOn: 1,
+  },
+  localize: {
+    ...enUS.localize,
+    day: (n) => ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][n],
+  },
+});
 
 const BookingForm = ({ camperId }) => {
   const dispatch = useDispatch();
@@ -20,7 +34,9 @@ const BookingForm = ({ camperId }) => {
     email: Yup.string()
       .email("Invalid email address.")
       .required("Email is required."),
-    date: Yup.date().required("Date is required."),
+    date: Yup.date()
+      .required("Date is required.")
+      .min(new Date(), "You can select date starting from tomorrow."),
   });
 
   const handleSubmit = (camperId) => async (values, actions) => {
@@ -107,10 +123,10 @@ const BookingForm = ({ camperId }) => {
               <DatePicker
                 selected={values.date}
                 onChange={(date) => setFieldValue("date", date)}
-                minDate={new Date()}
                 dateFormat="dd/MM/yyyy"
-                className={css.field}
+                className={clsx(css.field, css.datePicker)}
                 placeholderText="Booking date*"
+                locale="custom-en"
               />
             </div>
             <div>

@@ -6,6 +6,7 @@ import {
   selectCurrentCamper,
   selectOpenFeatures,
   selectLoading,
+  selectError,
 } from "../../redux/campers/selectors";
 import {
   clearCurrentCamper,
@@ -26,6 +27,7 @@ const CamperDetailsPage = () => {
   const currentCamper = useSelector(selectCurrentCamper);
   const openFeatures = useSelector(selectOpenFeatures);
   const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchCamperById(id));
@@ -34,6 +36,16 @@ const CamperDetailsPage = () => {
       dispatch(changeOpenFeatures(true));
     };
   }, [dispatch]);
+
+  if (error) {
+    return (
+      <div className={css.detailPageContainer}>
+        <p className={css.errorText}>
+          Something's gone wrong. Please, try again later.
+        </p>
+      </div>
+    );
+  }
 
   if (!currentCamper || loading) {
     return <Loader />;

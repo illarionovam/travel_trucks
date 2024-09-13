@@ -4,6 +4,7 @@ import {
   selectCurrentPage,
   selectIsLastPage,
   selectLoading,
+  selectError,
 } from "../../redux/campers/selectors";
 import { changeCurrentPage } from "../../redux/campers/slice";
 import { fetchCampers } from "../../redux/campers/operations";
@@ -17,11 +18,22 @@ const CampersList = () => {
   const currentPage = useSelector(selectCurrentPage);
   const isLastPage = useSelector(selectIsLastPage);
   const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   const handleClick = () => {
     dispatch(changeCurrentPage(currentPage + 1));
     dispatch(fetchCampers());
   };
+
+  if (error) {
+    return (
+      <div className={css.rightSideContainer}>
+        <p className={css.errorText}>
+          Something's gone wrong. Please, try again later.
+        </p>
+      </div>
+    );
+  }
 
   if (loading && campers.length === 0) {
     return <Loader />;

@@ -63,3 +63,110 @@ button {
     background-color: var(--button-hover);
   }
 }
+
+.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle {
+  color: var(--white) !important;
+  fill: var(--white) !important;
+}
+
+.react-datepicker {
+  border: 1px solid var(--text) !important;
+  border-radius: 12px !important;
+  font-family: inherit !important;
+  width: 276px;
+  height: auto;
+  font-size: 14px !important;
+  color: var(--main) !important;
+
+  .react-datepicker__navigation {
+    top: 7px;
+  }
+
+  button:hover {
+    background-color: var(--white);
+  }
+
+  .react-datepicker__navigation-icon::before {
+    border-color: var(--text) !important;
+    border-width: 2px 2px 0 0 !important;
+  }
+
+  .react-datepicker__month {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+    margin: 0;
+
+    .react-datepicker__week {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+
+      .react-datepicker__day--keyboard-selected,
+      .react-datepicker__day--selected {
+        background-color: var(--text);
+        color: var(--inputs) !important;
+        border-radius: 32px;
+      }
+
+      .react-datepicker__day--outside-month {
+        color: var(--text) !important;
+      }
+
+      .react-datepicker__day:hover {
+        background-color: var(--gray);
+        color: var(--inputs) !important;
+        border-radius: 32px;
+      }
+
+      .react-datepicker__day {
+        height: 32px;
+        width: 35px;
+        line-height: 1.2;
+        font-weight: 400;
+        font-size: 14px;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--main);
+      }
+    }
+  }
+
+  .react-datepicker__header {
+    border-bottom: 1px solid var(--text);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px !important;
+    background-color: var(--white);
+    padding: 12px;
+
+    .react-datepicker__current-month {
+      line-height: 1.2;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--main);
+    }
+
+    .react-datepicker__day-names {
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      gap: 0;
+      margin: 12px 0 0 0;
+
+      .react-datepicker__day-name {
+        color: var(--text);
+        width: 36px;
+        margin: 0;
+        line-height: 1.2;
+      }
+    }
+  }
+}
+
+.react-datepicker__month-container {
+  float: none !important;
+}
