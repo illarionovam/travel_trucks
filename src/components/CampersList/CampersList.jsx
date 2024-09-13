@@ -1,25 +1,31 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useMemo } from "react";
 import {
   selectFilteredCampers,
   selectCurrentPage,
   selectIsLastPage,
+  selectLoading,
 } from "../../redux/campers/selectors";
 import { changeCurrentPage } from "../../redux/campers/slice";
 import { fetchCampers } from "../../redux/campers/operations";
 import CamperItem from "../CamperItem/CamperItem";
 import css from "./CampersList.module.css";
+import Loader from "../Loader/Loader";
 
 const CampersList = () => {
   const dispatch = useDispatch();
   const campers = useSelector(selectFilteredCampers);
   const currentPage = useSelector(selectCurrentPage);
   const isLastPage = useSelector(selectIsLastPage);
+  const loading = useSelector(selectLoading);
 
   const handleClick = () => {
     dispatch(changeCurrentPage(currentPage + 1));
     dispatch(fetchCampers());
   };
+
+  if (loading && campers.length === 0) {
+    return <Loader />;
+  }
 
   if (campers.length === 0) {
     return (

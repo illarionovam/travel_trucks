@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   selectCurrentCamper,
   selectOpenFeatures,
+  selectLoading,
 } from "../../redux/campers/selectors";
 import {
   clearCurrentCamper,
@@ -17,12 +18,14 @@ import clsx from "clsx";
 import CamperFeatures from "../../components/CamperFeatures/CamperFeatures";
 import CamperReviews from "../../components/CamperReviews/CamperReviews";
 import BookingForm from "../../components/BookingForm/BookingForm";
+import Loader from "../../components/Loader/Loader";
 
 const CamperDetailsPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const currentCamper = useSelector(selectCurrentCamper);
   const openFeatures = useSelector(selectOpenFeatures);
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     dispatch(fetchCamperById(id));
@@ -32,8 +35,8 @@ const CamperDetailsPage = () => {
     };
   }, [dispatch]);
 
-  if (!currentCamper) {
-    return <p>Loading...</p>;
+  if (!currentCamper || loading) {
+    return <Loader />;
   }
 
   const buildButtonClass = (withHover) => {
