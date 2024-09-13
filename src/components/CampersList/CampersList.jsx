@@ -29,7 +29,9 @@ const CampersList = () => {
     return (
       <div className={css.rightSideContainer}>
         <p className={css.errorText}>
-          Something's gone wrong. Please, try again later.
+          {error.includes("404")
+            ? "There is nothing we can suggest you at the moment."
+            : "Something's gone wrong. Please, try again later."}
         </p>
       </div>
     );
