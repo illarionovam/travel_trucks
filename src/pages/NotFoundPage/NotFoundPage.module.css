@@ -1,0 +1,9 @@
+.detailPageContainer {
+  padding: 48px 64px;
+  max-width: var(--max-outer-container-width);
+  margin: 0 auto;
+
+  .errorText {
+    text-align: center;
+  }
+}

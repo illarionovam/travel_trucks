@@ -1,16 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import css from "./NotFoundPage.module.css";
 
 const NotFoundPage = () => {
-  const navigate = useNavigate();
-
-  const navigateToHome = () => {
-    navigate("/", { replace: true });
-  };
-
   return (
-    <main>
-      <p>There is nothing here. Please, go back to Home page.</p>
-      <button onClick={navigateToHome}>Back Home</button>
+    <main className={css.detailPageContainer}>
+      <p className={css.errorText}>
+        There is nothing here, please, return to the Home page.
+      </p>
     </main>
   );
 };
